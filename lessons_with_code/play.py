@@ -1,17 +1,20 @@
 import webapp2
 
+#action
 form="""
 <form action="https://www.google.com/search">
 	<input name="q">
 	<input type="submit">
 </form>
 """
+#method
 form2="""
 <form method="post" action="/testform">
 	<input name="q">
 	<input type="submit">
 </form>
 """
+#type
 form3="""
 <form>
 	<input type="password" name="q">
