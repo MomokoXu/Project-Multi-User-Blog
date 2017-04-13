@@ -12,11 +12,17 @@ form2="""
 	<input type="submit">
 </form>
 """
+form3="""
+<form>
+	<input type="password" name="q">
+	<input type="submit">
+</form>
+"""
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
         #self.response.headers['Content-Type'] = 'text/plain'
-        self.response.write(form2)
+        self.response.write(form3)
 
 class TestHandler(webapp2.RequestHandler):
 	def post(self):
