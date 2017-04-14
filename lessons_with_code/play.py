@@ -51,11 +51,30 @@ form6="""
 	<input type="submit">
 </form>
 """
+#label element
+form7="""
+<form>
+	<label>
+		One
+		<input type="radio" name="q" value="one">
+	</label>
+	<label>
+		Two
+		<input type="radio" name="q" value="two">
+	</label>
+	<label>
+		Three
+		<input type="radio" name="q" value="three">
+	</label>
+	<br>
+	<input type="submit">
+</form>
+"""
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
         #self.response.headers['Content-Type'] = 'text/plain'
-        self.response.write(form6)
+        self.response.write(form7)
 
 class TestHandler(webapp2.RequestHandler):
 	def post(self):
