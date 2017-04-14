@@ -21,11 +21,18 @@ form3="""
 	<input type="submit">
 </form>
 """
+#checkbox
+form4="""
+<form>
+	<input type="checkbox" name="q">
+	<input type="submit">
+</form>
+"""
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
         #self.response.headers['Content-Type'] = 'text/plain'
-        self.response.write(form3)
+        self.response.write(form4)
 
 class TestHandler(webapp2.RequestHandler):
 	def post(self):
