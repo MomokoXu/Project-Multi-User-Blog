@@ -25,6 +25,9 @@ form3="""
 form4="""
 <form>
 	<input type="checkbox" name="q">
+	<input type="checkbox" name="r">
+	<input type="checkbox" name="s">
+	<br>
 	<input type="submit">
 </form>
 """
