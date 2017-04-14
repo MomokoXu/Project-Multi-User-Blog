@@ -42,10 +42,20 @@ form5="""
 </form>
 """
 
+form6="""
+<form>
+	<input type="radio" name="q" value="one">
+	<input type="radio" name="q" value="two">
+	<input type="radio" name="q" value="three">
+	<br>
+	<input type="submit">
+</form>
+"""
+
 class MainPage(webapp2.RequestHandler):
     def get(self):
         #self.response.headers['Content-Type'] = 'text/plain'
-        self.response.write(form5)
+        self.response.write(form6)
 
 class TestHandler(webapp2.RequestHandler):
 	def post(self):
