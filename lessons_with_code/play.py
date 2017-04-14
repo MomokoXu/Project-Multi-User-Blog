@@ -74,9 +74,9 @@ form7="""
 form8="""
 <form>
 	<select name="q">
-		<option>One</option>
-		<option>Two</option>
-		<option>Three</option>
+		<option value="1">The numebr one</option>
+		<option value="2">Two</option>
+		<option value="3">Three</option>
 	</select>
 	<br>
 	<input type="submit">
