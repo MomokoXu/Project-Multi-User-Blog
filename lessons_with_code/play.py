@@ -1,121 +1,18 @@
 import webapp2
 
-'''
-#action
-form="""
-<form action="https://www.google.com/search">
-    <input name="q">
-    <input type="submit">
-</form>
 """
-#method
-form2="""
-<form method="post" action="/testform">
-    <input name="q">
-    <input type="submit">
-</form>
+    What's your birthday example
 """
-#type
-form3="""
-<form>
-    <input type="password" name="q">
-    <input type="submit">
-</form>
-"""
-#checkbox
-form4="""
-<form>
-    <input type="checkbox" name="q">
-    <input type="checkbox" name="r">
-    <input type="checkbox" name="s">
-    <br>
-    <input type="submit">
-</form>
-"""
-#radio buttons
-form5="""
-<form>
-    <input type="radio" name="q">
-    <input type="radio" name="r">
-    <input type="radio" name="s">
-    <br>
-    <input type="submit">
-</form>
-"""
-
-form6="""
-<form>
-    <input type="radio" name="q" value="one">
-    <input type="radio" name="q" value="two">
-    <input type="radio" name="q" value="three">
-    <br>
-    <input type="submit">
-</form>
-"""
-#label element
-form7="""
-<form>
-    <label>
-        One
-        <input type="radio" name="q" value="one">
-    </label>
-    <label>
-        Two
-        <input type="radio" name="q" value="two">
-    </label>
-    <label>
-        Three
-        <input type="radio" name="q" value="three">
-    </label>
-    <br>
-    <input type="submit">
-</form>
-"""
-#dropdown
-form8="""
-<form>
-    <select name="q">
-        <option value="1">The numebr one</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-    </select>
-    <br>
-    <input type="submit">
-</form>
-"""
-
-class MainPage(webapp2.RequestHandler):
-    def get(self):
-        #self.response.headers['Content-Type'] = 'text/plain'
-        self.response.write(form8)
-
-
-class TestHandler(webapp2.RequestHandler):
-    def post(self):
-        #q = self.request.get("q")
-        #self.response.out.write(q)
-        self.response.headers['Content-Type'] = 'text/plain'
-        self.response.write(self.request)
-
-app = webapp2.WSGIApplication([
-    ('/', MainPage), ('/testform', TestHandler)
-], debug=True)
-'''
-
-# What's your brithday
 form="""
 <form method="post">
     What is your birthday?
     <br>
-    <label> Month
-        <input name="month">
-    </label>
-    <label> Day
-    <input name="day">
-    </label>
-    <label> Year
-    <input name="year">
-    </label>
+    <label>Month<input name="month" value="%(month)s"></label>
+    <label>Day<input name="day" value="%(day)s"></label>
+    <label>Year<input name="year" value="%(year)s"></label>
+    <div style="color: red">%(error)s</div>
+    <br>
+    <br>
     <input type="submit">
 </form>
 """
@@ -152,16 +49,29 @@ def valid_year(year):
         return int(year)
 
 class MainPage(webapp2.RequestHandler):
+    def write_form(self, error="", month="", day="", year=""):
+        self.response.out.write(form % {"error": error,
+                                        "month": month,
+                                        "day": day,
+                                        "year": year})
+
     def get(self):
-        self.response.out.write(form)
+        #self.response.out.write(form)
+        self.write_form()
 
     def post(self):
-        user_month = valid_month(self.request.get('month'))
-        user_day = valid_day(self.request.get('day'))
-        user_year = valid_year(self.request.get('year'))
+        user_month = self.request.get('month')
+        user_day = self.request.get('day')
+        user_year = self.request.get('year')
+
+        month = valid_month(user_month)
+        day = valid_day(user_day)
+        year = valid_year(user_year)
+
         # if not all 3 of these aren't true, rerender our form again
-        if not (user_month and user_day and user_year):
-            self.response.out.write(form)
+        if not (month and day and year):
+            #self.response.out.write(form)
+            self.write_form("That does not look valid for me, friend.", user_month, user_day, user_year)
         else:
             self.response.out.write("Thanks! That's a totally valid day!")
 
