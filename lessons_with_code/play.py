@@ -1,4 +1,5 @@
 import webapp2
+import cgi
 
 """
     What's your birthday example
@@ -50,9 +51,12 @@ def valid_year(year):
 
 # handle escaping
 def escape_html(s):
+    """
     for (i, o) in (('&', '&amp;'), ('>', '&gt;'), ('<', '&lt;'), ('"', '&quot;')):
         s = s.replace(i, o)
-    return s
+    """
+    # use python built-in escape function
+    return cgi.escape(s, quote = True)
 
 class MainPage(webapp2.RequestHandler):
     def write_form(self, error="", month="", day="", year=""):
