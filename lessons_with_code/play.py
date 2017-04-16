@@ -48,6 +48,12 @@ def valid_year(year):
     if year and year.isdigit() and int(year) in range(1900, 2021):
         return int(year)
 
+# handle escaping
+def escape_html(s):
+    for (i, o) in (('&', '&amp;'), ('>', '&gt;'), ('<', '&lt;'), ('"', '&quot;')):
+        s = s.replace(i, o)
+    return s
+
 class MainPage(webapp2.RequestHandler):
     def write_form(self, error="", month="", day="", year=""):
         self.response.out.write(form % {"error": error,
