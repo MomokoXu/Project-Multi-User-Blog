@@ -56,10 +56,13 @@ def escape_html(s):
 
 class MainPage(webapp2.RequestHandler):
     def write_form(self, error="", month="", day="", year=""):
+        escape_month = escape_html(month)
+        escape_day = escape_html(day)
+        escape_year = escape_html(year)
         self.response.out.write(form % {"error": error,
-                                        "month": month,
-                                        "day": day,
-                                        "year": year})
+                                        "month": escape_month,
+                                        "day": escape_day,
+                                        "year": escape_year})
 
     def get(self):
         #self.response.out.write(form)
