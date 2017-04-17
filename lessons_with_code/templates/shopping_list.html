@@ -3,4 +3,25 @@
 	<h2>Add a Food<h2>
 	<input type="text" name="food">
 	<button>Add</button>
+	<!-- test variable substitution
+	<h2>Hello, {{name}}</h2>
+	<br>
+	<h2>The quick brown {{animal1}} jumped over the lazy {{animal2}}</h2>
+	-->
+	<!-- test statment syntax
+	{% if n == 1 %}
+		n equals 1
+	{% else %}
+		n does not equal 1
+	{% endif %}
+	-->
+	<!-- for statement test -->
+	<ul>
+		{% for x in range(1, n + 1) %}
+			<li> {{x ** 2}} </li>
+		{% endfor %}
+	</ul>
+
+	<!-- Fuzzbuzz test -->
+
 </form>
