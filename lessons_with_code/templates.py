@@ -33,5 +33,7 @@ class FizzBuzzHandler(Handler):
 		n = self.request.get('n', 0)
 		n = n and int(n)
 		self.render("fizzbuzz.html", n = n)
+
+
 app = webapp2.WSGIApplication([('/', MainPage), ('/fizzbuzz', FizzBuzzHandler)], debug=True)
 
