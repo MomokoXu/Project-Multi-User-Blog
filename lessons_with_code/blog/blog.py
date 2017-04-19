@@ -10,6 +10,7 @@ template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 # jinja_env: it means we render templates, jinja will look for those tmeplates in template_dir
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
 
+# Base Handler
 class Handler(webapp2.RequestHandler):
     def write(self, *a, **kw):
         self.response.out.write(*a, **kw)
