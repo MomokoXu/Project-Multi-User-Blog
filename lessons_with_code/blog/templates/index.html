@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <link type="text/css" rel="stylesheet" href="/css/main.css" />
+
+	  <title>Momoko's Blog App</title>
+	</head>
+
+	<body>
+	  <a href="/" class="main-title">Momoko's Blog App</a>
+	  <div id="content">
+		{% block content %}
+			<h3>Welcome to Momoko's Blog App</h3>
+			<h3>Please choose the options below:</h3>
+			<a href="/signup" class="signup">Sign up</a>
+			<br><br>
+			<a href="/blog" class="posts">Most recent posts</a>
+			<br><br>
+
+
+			<form method="post">
+				<label>
+				<div>A particular post</div>
+				<input type="text" name="post_id" value="{{post_id}}">
+				</label>
+
+				<div class="error">{{error}}</div>
+				<input type="submit">
+			</form>
+
+			<br><br>
+			<a href="/blog/newpost" class="newpost">Create a new post</a>
+		{% endblock %}
+	  </div>
+	</body>
+
+</html>
+
