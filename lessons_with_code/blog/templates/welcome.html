@@ -1,12 +1,9 @@
 
-<!DOCTYPE html>
-
-<html>
-  <head>
-    <title>Welcome</title>
-  </head>
+{% extends "base.html" %}
 
   <body>
-    <h2>Welcome, {{username}}</h2>
+	{% block content %}
+	    <h2>Welcome to Momoko's Blog App, {{username}}</h2>
+	{% endblock %}
   </body>
 </html>
