@@ -38,14 +38,18 @@ class MainPage(Handler):
         self.render('index.html')
     def post(self):
         post_id = self.request.get('post_id')
-        key = db.Key.from_path('Post', int(post_id), parent = blog_key())
-        post = db.get(key)
-        # if no such post, display error 404; otherwise render the post page
-        if post:
-            self.render('permalink.html', post = post)
-        else:
-            error = "No such post, please enter another post id!"
-            self.render('index.html', post_id = post_id, error = error)
+        try:
+            key = db.Key.from_path('Post', int(post_id), parent = blog_key())
+            post = db.get(key)
+            # if no such post, display error 404; otherwise render the post page
+            if post:
+                self.render('permalink.html', post = post)
+            else:
+                error = "No such post, please enter another post id!"
+                self.render('index.html', post_id = post_id, error = error)
+        except(ValueError):
+                error = "Invalid post id, try again!"
+                self.render('index.html', error = error)
 # Signup
 # 1. check regular expression matching for username, password and email
 USER_RE = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
