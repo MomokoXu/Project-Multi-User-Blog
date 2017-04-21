@@ -1,0 +1,122 @@
+body {
+	font-family: courier;
+	width: 80%;
+	margin: 0 auto;
+	padding: 10px;
+}
+
+div#content {
+	background-color: beige;
+	font-family: serif;
+	padding: 5vw;
+}
+
+h1 {
+ 	background-color: #dde;
+ 	height: 100%;
+	font-weight: bold;
+	font-family: verdana;
+	text-align: center;
+	width: 100%;
+	font-size: 4vw;
+}
+.main-title {
+	color: #a2e;
+}
+
+h2 {
+ 	height: 100%;
+	font-weight: bold;
+	font-family: verdana;
+	text-align: center;
+	width: 100%;
+	color: #ead;
+	font-size: 2.5vw;
+	margin-top: 0;
+	margin-bottom: 2vw;
+}
+
+h3 {
+	height: 100%;
+	font-weight: bold;
+	font-family: sans-serif;
+	width: 100%;
+	font-size: 2vw;
+}
+
+.error {
+	color: red;
+	width: 40%;
+	font-size: 2vw;
+	padding:2px;
+}
+
+label {
+	display: block;
+	font-size: 2vw;
+}
+
+
+textarea {
+	width: 30vw;
+	height: 30vh;
+	font-size: 17px;
+	font-family: monospace;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+
+input[type=submit] {
+	font-size: 1.5vw;
+	margin-top: 1.5vw;
+}
+
+input[type=text] {
+	width: 12vw;
+	height: 2vh;
+}
+
+input[type=password] {
+	width: 12vw;
+	height: 2vh;
+}
+
+.label {
+	font-family: sans-serif;
+	font-size: 1.5vw;
+	color: grey;
+}
+
+.option {
+	font-family: sans-serif;
+	font-size: 1.5vw;
+	color: grey;
+}
+
+.post + .post {
+    margin-top: 1vw;
+}
+
+.post-heading {
+    position: relative;
+    border-bottom: 3px solid #666;
+}
+
+.post-title {
+    font-size: 2.5vw;
+    font-weight: bold;
+}
+
+.post-date {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    color: #999;
+    font-size: 2vw;
+}
+
+.post-content {
+    margin-top: 1vw;
+    font-size: 1.5vw;
+}
