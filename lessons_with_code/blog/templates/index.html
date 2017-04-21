@@ -7,29 +7,25 @@
 	</head>
 
 	<body>
-	  <a href="/" class="main-title">Momoko's Blog App</a>
+	  <h1><a href="/" class="main-title">Momoko's Blog App</a></h1>
 	  <div id="content">
 		{% block content %}
-			<h3>Welcome to Momoko's Blog App</h3>
+			<h2>Welcome to Momoko's Blog App</h2>
 			<h3>Please choose the options below:</h3>
-			<a href="/signup" class="signup">Sign up</a>
+			<a href="/signup" class="option">Sign up</a>
 			<br><br>
-			<a href="/blog" class="posts">Most recent posts</a>
+			<a href="/blog" class="option">Most recent posts</a>
 			<br><br>
-
-
 			<form method="post">
-				<label>
-				<div>A particular post</div>
+				<label class="option">A particular post
 				<input type="text" name="post_id" value="{{post_id}}">
 				</label>
-
 				<div class="error">{{error}}</div>
 				<input type="submit">
 			</form>
 
 			<br><br>
-			<a href="/blog/newpost" class="newpost">Create a new post</a>
+			<a href="/blog/newpost" class="option">Create a new post</a>
 		{% endblock %}
 	  </div>
 	</body>
