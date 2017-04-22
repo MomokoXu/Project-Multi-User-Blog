@@ -5,6 +5,8 @@ import re
 
 from google.appengine.ext import db
 
+import hashlib
+
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
                                autoescape = True)
@@ -22,6 +24,29 @@ class Handler(webapp2.RequestHandler):
     def render_str(self, template, **params):
         t = jinja_env.get_template(template)
         return t.render(params)
+
+"""Hash Cookie"""
+def hash_str(s):
+    return hashlib.md5(s).hexdigest()
+
+# -----------------
+# User Instructions
+#
+# Implement the function make_secure_val, which takes a string and returns a
+# string of the format:
+# s,HASH
+
+def make_secure_val(s):
+    return "%s, %s" % (s, hash_str(s))
+
+# Implement the function check_secure_val, which takes a string of the format
+# s,HASH
+# and returns s if hash_str(s) == HASH, otherwise None
+
+def check_secure_val(h):
+    str = h.split(',')[0]
+    if h == make_secure_val(str):
+        return str
 
 class MainPage(Handler):
     def get(self):
