@@ -37,14 +37,14 @@ def hash_str(s):
 # s,HASH
 
 def make_secure_val(s):
-    return "%s, %s" % (s, hash_str(s))
+    return "%s|%s" % (s, hash_str(s))
 
 # Implement the function check_secure_val, which takes a string of the format
 # s,HASH
 # and returns s if hash_str(s) == HASH, otherwise None
 
 def check_secure_val(h):
-    str = h.split(',')[0]
+    str = h.split('|')[0]
     if h == make_secure_val(str):
         return str
 
@@ -66,17 +66,17 @@ class MainPage(Handler):
         """
         """With hashed cookie"""
         visits = 0
-        visits = self.request.cookies.get('visits')
-        if  visits:
-            cookie_val = check_secure_val(visits)
+        visits_cookie_str = self.request.cookies.get('visits')
+        if visits_cookie_str:
+            cookie_val = check_secure_val(visits_cookie_str)
             if cookie_val:
                 visits = int(cookie_val)
-            else:
-                visits = 0
+        visits += 1
+        new_cookie_val = make_secure_val(str(visits))
         # store the visits time into cookie so next time we refresh the page we
             # will get the times
         # The way we set cookie in App engine is just set the cookie header.
-        self.response.headers.add_header('Set-cookie', 'visits=%s' % visits)
+        self.response.headers.add_header('Set-cookie', 'visits=%s' % new_cookie_val)
         if visits > 1000:
             self.write("You are the best ever!!")
         else:
