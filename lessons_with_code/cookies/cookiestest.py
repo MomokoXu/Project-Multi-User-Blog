@@ -26,9 +26,13 @@ class Handler(webapp2.RequestHandler):
         return t.render(params)
 
 """Hash Cookie"""
-def hash_str(s):
+def hash_str_no_secret(s):
     return hashlib.md5(s).hexdigest()
 
+# Implement the hash_str function to use HMAC and our SECRET instead of md5
+SECRET = 'imsosecret'
+def hash_str(s):
+    return hmac.new(SECRET, s).hexdigest()
 # -----------------
 # User Instructions
 #
