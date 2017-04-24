@@ -66,9 +66,24 @@ def make_salt():
 # HASH(name + pw + salt),salt
 # use sha256
 
-def make_pw_hash(name, pw):
+def make_pw_hash_old(name, pw):
     salt = make_salt()
+    print salt
     return "%s,%s" % (hashlib.sha256(name + pw + salt).hexdigest(), salt)
+
+# Implement the function valid_pw() that returns True if a user's password
+# matches its hash. You will need to modify make_pw_hash.
+
+def make_pw_hash(name, pw, salt=None):
+    if not salt:
+        salt = make_salt()
+    h = hashlib.sha256(name + pw + salt).hexdigest()
+    return '%s,%s' % (h, salt)
+
+def valid_pw(name, pw, h):
+    salt = h.split(',')[1]
+    return h == make_pw_hash(name, pw, salt)
+
 
 class MainPage(Handler):
     def get(self):
