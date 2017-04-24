@@ -6,6 +6,9 @@ import re
 from google.appengine.ext import db
 
 import hashlib
+import hmac
+import random
+import string
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
@@ -33,9 +36,8 @@ def hash_str_no_secret(s):
 SECRET = 'imsosecret'
 def hash_str(s):
     return hmac.new(SECRET, s).hexdigest()
-# -----------------
-# User Instructions
-#
+
+
 # Implement the function make_secure_val, which takes a string and returns a
 # string of the format:
 # s,HASH
@@ -51,6 +53,22 @@ def check_secure_val(h):
     str = h.split('|')[0]
     if h == make_secure_val(str):
         return str
+
+"""password hasing"""
+# Implement the function make_salt() that returns a string of 5 random
+# letters use python's random module.
+# Note: The string package might be useful here.
+
+def make_salt():
+    return ''.join(random.choice(string.letters) for x in range(5))
+# implement the function make_pw_hash(name, pw) that returns a hashed password
+# of the format:
+# HASH(name + pw + salt),salt
+# use sha256
+
+def make_pw_hash(name, pw):
+    salt = make_salt()
+    return "%s,%s" % (hashlib.sha256(name + pw + salt).hexdigest(), salt)
 
 class MainPage(Handler):
     def get(self):
