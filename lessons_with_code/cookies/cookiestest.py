@@ -55,15 +55,24 @@ class MainPage(Handler):
             # request object will have a cookie object,
             # and get cookie with key = 'visits', the key exist, get the value,
             # if not set it to zero
+        """
         visits = self.request.cookies.get('visits', 0)
-
         #make sure visits is an int
         if visits.isdigit():
             # as visit times increases, increates number of times
             visits = int(visits) + 1
         else:
             visits = 0
-
+        """
+        """With hashed cookie"""
+        visits = 0
+        visits = self.request.cookies.get('visits')
+        if  visits:
+            cookie_val = check_secure_val(visits)
+            if cookie_val:
+                visits = int(cookie_val)
+            else:
+                visits = 0
         # store the visits time into cookie so next time we refresh the page we
             # will get the times
         # The way we set cookie in App engine is just set the cookie header.
