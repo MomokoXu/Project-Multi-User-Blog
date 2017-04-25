@@ -24,6 +24,9 @@ Hope you enjoy this project!
 ## How to use it
 * This project has deployed on Google App Engine, so just simple open [this front page](https://momokotest-164402.appspot.com/) in your browser to explore more.
 
+## Source code:
+All source codes are in `\project`, please switch to `\project` to explore more.
+
 ## Author
 [Yingtao Xu](https://github.com/MomokoXu)
 
