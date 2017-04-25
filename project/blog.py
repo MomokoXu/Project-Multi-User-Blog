@@ -4,7 +4,6 @@ import jinja2
 import re
 import hmac
 from google.appengine.ext import db
-
 from user import User
 
 # os.path.join: concatenates two file names:
