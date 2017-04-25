@@ -6,7 +6,7 @@ body {
 }
 
 div#content {
-	background-color: beige;
+	background-color: #def;
 	font-family: serif;
 	padding: 5vw;
 }
@@ -21,7 +21,7 @@ h1 {
 	font-size: 4vw;
 }
 .main-title {
-	color: #a2e;
+	color: #aaf;
 }
 
 h2 {
