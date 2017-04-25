@@ -1,34 +1,29 @@
-<!DOCTYPE html>
-<html>
-	<head>
-	  <link type="text/css" rel="stylesheet" href="/css/main.css" />
+{% extends "base.html" %}
 
-	  <title>Momoko's Blog App</title>
-	</head>
+{% block content %}
+	<h2>Welcome to Momoko's Blog App</h2>
+	<h3>Please choose the options below:</h3>
+	<a href="/login" class="option">
+		Login
+	</a>
+	<div class="error">{{login_error}}</div>
+	<br>
+	<a href="/signup" class="option">Sign up</a>
+	<div class="error">{{signup_error}}</div>
+	<br>
+	<a href="/blog" class="option">Latest posts</a>
+	<br><br>
+	<form method="post">
+		<label class="option">Look for a particular post
+		<input type="text" name="post_id" value="{{post_id}}">
+		</label>
+		<div class="error">{{error}}</div>
+		<input type="submit">
+	</form>
 
-	<body>
-	  <h1><a href="/" class="main-title">Momoko's Blog App</a></h1>
-	  <div id="content">
-		{% block content %}
-			<h2>Welcome to Momoko's Blog App</h2>
-			<h3>Please choose the options below:</h3>
-			<a href="/signup" class="option">Sign up</a>
-			<br><br>
-			<a href="/blog" class="option">Most recent posts</a>
-			<br><br>
-			<form method="post">
-				<label class="option">A particular post
-				<input type="text" name="post_id" value="{{post_id}}">
-				</label>
-				<div class="error">{{error}}</div>
-				<input type="submit">
-			</form>
+	<br><br>
+	<a href="/blog/newpost" class="option">Create a new post</a>
+	<div class="error">{{newpost_error}}</div>
+{% endblock %}
 
-			<br><br>
-			<a href="/blog/newpost" class="option">Create a new post</a>
-		{% endblock %}
-	  </div>
-	</body>
-
-</html>
 
