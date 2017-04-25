@@ -2,7 +2,7 @@ body {
 	font-family: courier;
 	width: 80%;
 	margin: 0 auto;
-	padding: 10px;
+	padding: 1vw;
 }
 
 div#content {
@@ -46,9 +46,7 @@ h3 {
 
 .error {
 	color: red;
-	width: 40%;
-	font-size: 2vw;
-	padding:2px;
+	font-size: 1.5vw;
 }
 
 label {
@@ -66,6 +64,12 @@ textarea {
 	max-height: 100%;
 }
 
+.login-area {
+	text-align: right;
+	font-family: sans-serif;
+	font-size: 1.5vw;
+	color: grey;
+}
 
 input[type=submit] {
 	font-size: 1.5vw;
@@ -107,6 +111,11 @@ input[type=password] {
     font-size: 2.5vw;
     font-weight: bold;
 }
+.post-author{
+    font-size: 1.5vw;
+    font-weight: bold;
+    margin-left: 6vw;
+}
 
 .post-date {
     position: absolute;
@@ -119,4 +128,5 @@ input[type=password] {
 .post-content {
     margin-top: 1vw;
     font-size: 1.5vw;
+    margin-bottom: 2vh;
 }
