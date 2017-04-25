@@ -6,12 +6,8 @@ import hmac
 from google.appengine.ext import db
 from user import User
 
-# os.path.join: concatenates two file names:
-    # os.path.dirname(__file__) directory of my current file is in
-    # 'templates'
+# Jinjia template engine
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
-# jinja_env: it means we render templates, jinja will look for those tmeplates
-# in template_dir
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
                                autoescape = True)
 
@@ -107,7 +103,7 @@ def valid_email(email):
 class Signup(Handler):
     def get(self):
         if self.user:
-            signup_error="You already have a account and you are logged in!"
+            signup_error= "You already have a account and you are logged in!"
             self.render('/index.html', signup_error=signup_error)
         else:
             self.render('signup.html')
@@ -150,7 +146,7 @@ class Signup(Handler):
             self.render('signup.html', username_error=error)
         else:
             # if not exist, create new user and store into db
-            # then login user and redirect to blog page
+            # then login user and redirect to welcome page
             usr = User.register(self.username, self.password, self.email)
             usr.put()
             self.login(usr)

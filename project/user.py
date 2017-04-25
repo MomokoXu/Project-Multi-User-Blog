@@ -3,8 +3,9 @@ import hashlib
 import random
 from string import letters
 
-##### user stuff
-"""password hasing"""
+######### User class for create and store user information #########
+
+# password hasing
 def make_salt(length = 5):
     return ''.join(random.choice(letters) for x in xrange(length))
 
@@ -21,6 +22,7 @@ def valid_pw(name, password, h):
 def users_key(group = 'default'):
     return db.Key.from_path('users', group)
 
+# User class
 class User(db.Model):
     name = db.StringProperty(required = True)
     pw_hash = db.StringProperty(required = True)
