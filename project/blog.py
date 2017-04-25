@@ -2,9 +2,6 @@ import os
 import webapp2
 import jinja2
 import re
-import random
-import string
-import hashlib
 import hmac
 from google.appengine.ext import db
 
