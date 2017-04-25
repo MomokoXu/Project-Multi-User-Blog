@@ -1,12 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-	<h2> Most recent posts</h2>
+	<h2> Latest posts</h2>
 	{% for p in posts%}
 		{{p.render() | safe}}
 		<br>
 		<br>
 	{% endfor %}
-
 {% endblock%}
