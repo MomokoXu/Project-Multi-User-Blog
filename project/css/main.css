@@ -5,6 +5,10 @@ body {
 	padding: 1vw;
 }
 
+.cancel {
+	text-decoration: none;
+}
+
 div#content {
 	background-color: #def;
 	font-family: serif;
@@ -22,6 +26,7 @@ h1 {
 }
 .main-title {
 	color: #aaf;
+	text-decoration: none;
 }
 
 h2 {
@@ -104,17 +109,18 @@ input[type=password] {
 
 .post-heading {
     position: relative;
-    border-bottom: 3px solid #666;
+    border-bottom: 2px solid #888;
 }
 
 .post-title {
+	color: #a7c;
     font-size: 2.5vw;
     font-weight: bold;
 }
 .post-author{
-    font-size: 1.5vw;
-    font-weight: bold;
-    margin-left: 6vw;
+	bottom: 0px;
+    font-size: 2vw;
+    margin-left: 7vw;
 }
 
 .post-date {
