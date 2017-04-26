@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>What do you want to post today &#x263a;</h2>
+  <h2>Edit what you want &#x263a;</h2>
 
     <form method="post">
       <label>
@@ -17,6 +17,7 @@
       <div class="error">{{error}}</div>
 
       <button type="submit">Submit</button>
-      <button type="submit"><a href="/" class="cancel">Cancel</a></button>
+      <button type="submit"><a href="/blog/{{post.key().id()}}" class="cancel">
+        Cancel</a></button>
     </form>
 {% endblock %}

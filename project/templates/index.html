@@ -3,22 +3,21 @@
 {% block content %}
 	<h2>Welcome to Momoko's Blog App</h2>
 	<h3>Please choose the options below:</h3>
-	<a href="/login" class="option">
-		Login
-	</a>
-	<div class="error">{{login_error}}</div>
-	<br>
-	<a href="/signup" class="option">Sign up</a>
-	<div class="error">{{signup_error}}</div>
-	<br>
+	{% if not user %}
+		<a href="/login" class="option">Login</a>
+		<br><br>
+		<a href="/signup" class="option">Sign up</a>
+		<br><br>
+	{% endif %}
 	<a href="/blog" class="option">Latest posts</a>
 	<br><br>
+
 	<form method="post">
 		<label class="option">Look for a particular post
 		<input type="text" name="post_id" value="{{post_id}}">
+		<input type="submit">
 		</label>
 		<div class="error">{{error}}</div>
-		<input type="submit">
 	</form>
 
 	<br><br>

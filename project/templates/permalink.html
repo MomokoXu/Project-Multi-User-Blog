@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-  {{post.render() | safe}}
+	{{post.render() | safe}}
+
+	{% if user and post.user.name == user.name %}
+		<div class="manage-post">
+			<form method="get">
+				<button type="submit">Edit</button>
+			</form>
+		</div>
+	{% endif%}
 {% endblock %}

@@ -1,30 +1,34 @@
-{% extends "base.html" %}
-
+<!DOCTYPE html>
+<html>
   <head>
-    <title>Login</title>
+    <link type="text/css" rel="stylesheet" href="/css/main.css" />
+    <title>Momoko's Blog App</title>
   </head>
+
   <body>
-    {% block content %}
-    <h2>Login</h2>
-    <form method="post">
-      <table>
-        <tr>
-          <td class="label">Username</td>
-          <td><input type="text" name="username" value="{{username}}"></td>
-        </tr>
+    <h1><a href="/" class="main-title">&#x2764; Momoko's Blog App &#x2764;</a></h1>
+    <div class="login-area">Please log in</div>
+    <div id="content">
+      <h2>Login</h2>
+      <form method="post">
+        <table>
+          <tr>
+            <td class="label">Username</td>
+            <td><input type="text" name="username" value="{{username}}"></td>
+          </tr>
 
-        <tr>
-          <td class="label">Password</td>
-          <td><input type="password" name="password" value=""></td>
-        </tr>
-      </table>
+          <tr>
+            <td class="label">Password</td>
+            <td><input type="password" name="password" value=""></td>
+          </tr>
+        </table>
 
-      <div class="error">
-        {{error}}
-      </div>
+        <div class="error">
+          {{error}}
+        </div>
 
-      <input type="submit">
-    </form>
+        <input type="submit">
+      </form>
+    </div>
   </body>
-
-{% endblock %}
+</html>
