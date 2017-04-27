@@ -5,6 +5,14 @@ body {
 	padding: 1vw;
 }
 
+.home {
+	text-shadow: 3px 3px 3px #aaa;
+	text-align: center;
+	font-size: 1.2vw;
+	color: #223186;
+	display: block;
+}
+
 .btn {
 	text-decoration: none;
 	color: black;
@@ -135,8 +143,13 @@ input[type=password] {
     font-size: 1.5vw;
     margin-bottom: 2vh;
     padding: 1vw;
-	border: 2px solid #94a354;
+	border: 3px solid beige;
 
+}
+
+.post-area {
+	display: table;
+	margin: auto
 }
 
 
@@ -147,7 +160,7 @@ h4 {
 
 .comments {
 	margin-top: 3vh;
-	border: 2px solid #94a354;
+	border: 2px solid beige;
 	padding: 1vw;
 }
 
@@ -165,6 +178,23 @@ h4 {
     font-size: 1.5vw;
     color: grey;
 }
+
 .new-comment {
 	display: inline;
+}
+
+.comment-area {
+	display: table;
+	margin: auto
+}
+
+button#like-num {
+	display: inline;
+	color: black;
+    background-color: white;
+    border: none;
+    text-decoration: none;
+    font-size: 1vw;
+    margin-top: 1vw;
+    margin-bottom: 0.5vw;
 }
