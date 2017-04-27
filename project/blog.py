@@ -1,33 +1,16 @@
 import os
 import webapp2
 import jinja2
-import re
-import hmac
+import time
 from google.appengine.ext import db
 from user import User
+from post import Post
+from comment import Comment
+from utility import render_str
+from utility import check_secure_val, make_secure_val
+from utility import valid_username, valid_password, valid_email
+from utility import blog_key, comment_key
 
-# Jinjia template engine
-template_dir = os.path.join(os.path.dirname(__file__), 'templates')
-jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
-                               autoescape = True)
-
-
-def render_str(template, **params):
-    t = jinja_env.get_template(template)
-    return t.render(params)
-
-########## Cookie Hasing #########
-SECRET = 'momoko'
-def hash_str(s):
-    return hmac.new(SECRET, s).hexdigest()
-
-def make_secure_val(s):
-    return "%s|%s" % (s, hash_str(s))
-
-def check_secure_val(h):
-    hstr = h.split('|')[0]
-    if h == make_secure_val(hstr):
-        return hstr
 
 ######### Base Handler #########
 class Handler(webapp2.RequestHandler):
@@ -84,27 +67,13 @@ class MainPage(Handler):
                 error = "Invalid post id, try again!"
                 self.render('index.html', error = error)
 
-
 ######### Signup #########
-# 1. check regular expression matching for username, password and email
-USER_RE = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
-def valid_username(username):
-    return username and USER_RE.match(username)
 
-PASS_RE = re.compile(r"^.{3,20}$")
-def valid_password(password):
-    return password and PASS_RE.match(password)
-
-EMAIL_RE = re.compile(r"^[\S]+@[\S]+.[\S]+$")
-def valid_email(email):
-    return not email or EMAIL_RE.match(email)
-
-# 2. Signup Handler
+# Signup Handler
 class Signup(Handler):
     def get(self):
         if self.user:
-            signup_error= "You already have a account and you are logged in!"
-            self.render('/index.html', signup_error=signup_error)
+            return self.redirect('/')
         else:
             self.render('signup.html')
 
@@ -150,14 +119,13 @@ class Signup(Handler):
             usr = User.register(self.username, self.password, self.email)
             usr.put()
             self.login(usr)
-            self.redirect('/welcome')
+            return self.redirect('/welcome')
 
 ########## Login #########
 class Login(Handler):
     def get(self):
         if self.user:
-            login_error="You are already logged in!"
-            self.render('/index.html', login_error=login_error)
+            return self.redirect('/')
         else:
             self.render('login.html')
 
@@ -168,8 +136,7 @@ class Login(Handler):
         usr = User.login(username, password)
         if usr:
             self.login(usr)
-            msg = "Welcome back"
-            self.redirect('/welcome')
+            return self.redirect('/welcome')
         else:
             error = "Invalid login, try again"
             self.render('login.html', error=error)
@@ -190,26 +157,11 @@ class Welcome(Handler):
             # generate front page to display most rescent posts
             self.render('welcome.html', username = self.user.name, posts=posts)
         else:
-            self.redirect('/signup')
+            return self.redirect('/signup')
+
 
 ######### Blog pages #########
-# 1. get blog keys from datastore
-def blog_key(name = 'default'):
-    return db.Key.from_path('blogs', name)
-
-# 2. Post
-class Post(db.Model):
-    subject = db.StringProperty(required = True)
-    content = db.TextProperty(required = True)
-    author = db.StringProperty(required = True)
-    created_time = db.DateTimeProperty(auto_now_add = True)
-    last_modified_time = db.DateTimeProperty(auto_now = True)
-
-    def render(self):
-        self._render_text = self.content.replace('\n', '<br>')
-        return render_str('post.html', p = self)
-
-# 3. Blog Front Handeler: Handler for the main blog URL
+# Blog Front Handeler: Handler for the main blog URL
 class BlogFront(Handler):
     def get(self):
         # Looks at all of the posts ordered by creation
@@ -218,7 +170,7 @@ class BlogFront(Handler):
         # generate front page to display most rescent posts
         self.render('front.html', posts = posts)
 
-# 4. Post page Handler: page for a perticular post
+# Post page Handler: page for a perticular post
 class PostPage(Handler):
     def get(self, post_id):
         # make a key based on the post_id in Post objects
@@ -229,38 +181,113 @@ class PostPage(Handler):
         if not post:
             self.error(404)
             return
-        self.render('permalink.html', post = post)
+        comments = post.post_comments.order('-created_time')
+        self.render('permalink.html', post=post, user=self.user, comments=comments)
 
-# 5. New Post Handler: the page for posting new post
+# New Post Handler: the page for posting new post
 class NewPost(Handler):
     # check user exsit or not first
     def get(self):
         if self.user:
             self.render('newpost.html')
         else:
-            error = "Login first please!"
+            error = "Log in first please!"
             self.render('/index.html', newpost_error = error)
 
     def post(self):
         if not self.user:
-            self.redirect('/blog')
+            return self.redirect('/blog')
 
         subject = self.request.get('subject')
         content = self.request.get('content')
-        author = self.user.name
 
         if subject and content:
             # create new post object and store it into datastore
             p = Post(parent = blog_key(),
                      subject = subject,
                      content = content,
-                     author = author)
+                     user = self.user)
             p.put()
-            self.redirect('/blog/%s' % str(p.key().id()))
+            return self.redirect('/blog/%s' % str(p.key().id()))
         else:
             error = 'Please enter both subject and content!'
-            self.render('newpost.html', subject= subject, content = content,
+            self.render('newpost.html', subject = subject, content = content,
                                         error = error)
+# Edit Post Handler
+class EditPost(Handler):
+    def get(self, post_id):
+        if self.user:
+            key = db.Key.from_path('Post', int(post_id), parent = blog_key())
+            post = db.get(key)
+            self.render('editpost.html', subject=post.subject,
+                        content=post.content, post_id=post_id)
+        else:
+            error = "Login first please!"
+            self.render('/permalink.html', edit_error = error)
+
+    def post(self, post_id):
+        if not self.user:
+            return self.redirect('/blog')
+
+        subject = self.request.get('subject')
+        content = self.request.get('content')
+        # get post
+        key = db.Key.from_path('Post', int(post_id), parent = blog_key())
+        post = db.get(key)
+        if subject and content:
+            # change current post object and store it into datastore
+            post.subject = subject
+            post.content = content
+            post.put()
+            return self.redirect('/blog/%s' % str(post_id))
+        else:
+            error = 'Please enter both subject and content!'
+            self.render('editpost.html', subject = subject, content = content,
+                                         post_id = post_id, error = error)
+# Delete Post Handler
+class DeletePost(Handler):
+    def get(self, post_id):
+        key = db.Key.from_path('Post', int(post_id), parent = blog_key())
+        post = db.get(key)
+        post.delete()
+        time.sleep(0.1)
+        return self.redirect('/blog')
+
+
+######## Comment Handlers ########
+# New Comment Handler
+class NewComment(Handler):
+    def get(self, post_id):
+        key = db.Key.from_path('Post', int(post_id), parent = blog_key())
+        post = db.get(key)
+        if self.user and post:
+            self.render('newcomment.html', post_id = post_id)
+
+    def post(self, post_id):
+        key = db.Key.from_path('Post', int(post_id), parent = blog_key())
+        post = db.get(key)
+        if not self.user or not post:
+            return self.redirect('/blog')
+
+        comment = self.request.get('comment')
+
+        if comment:
+            c = Comment(parent = comment_key(),
+                              content = comment,
+                              post = post,
+                              user = self.user)
+            c.put()
+            time.sleep(0.2)
+            return self.redirect('/blog/%s' % post_id)
+        else:
+            error = 'Please enter your comment!'
+            self.render('newcomment.html', comment = comment,
+                                           error = error,
+                                           post_id = post_id)
+
+# Edit Comment Handler
+
+# Delete Comment Handeler
 
 app = webapp2.WSGIApplication([('/', MainPage),
                                ('/signup', Signup),
@@ -269,4 +296,7 @@ app = webapp2.WSGIApplication([('/', MainPage),
                                ('/blog/([0-9]+)', PostPage),
                                ('/blog/newpost', NewPost),
                                ('/login', Login),
-                               ('/logout', Logout)], debug=True)
+                               ('/logout', Logout),
+                               ('/blog/([0-9]+)/edit', EditPost),
+                               ('/blog/([0-9]+)/delete', DeletePost),
+                               ('/blog/([0-9]+)/comment/newcomment', NewComment)], debug=True)
