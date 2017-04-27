@@ -5,9 +5,12 @@ body {
 	padding: 1vw;
 }
 
-.cancel {
+.btn {
 	text-decoration: none;
+	color: black;
+	display: inline;
 }
+
 
 div#content {
 	background-color: #def;
@@ -117,13 +120,8 @@ input[type=password] {
     font-size: 2.5vw;
     font-weight: bold;
 }
-.post-author{
-	bottom: 0px;
-    font-size: 2vw;
-    margin-left: 7vw;
-}
 
-.post-date {
+.post-author-date {
     position: absolute;
     right: 0px;
     bottom: 0px;
@@ -131,8 +129,42 @@ input[type=password] {
     font-size: 2vw;
 }
 
+
 .post-content {
     margin-top: 1vw;
     font-size: 1.5vw;
     margin-bottom: 2vh;
+    padding: 1vw;
+	border: 2px solid #94a354;
+
+}
+
+
+h4 {
+	font-size: 2vw;
+	margin-top: 1vw;
+}
+
+.comments {
+	margin-top: 3vh;
+	border: 2px solid #94a354;
+	padding: 1vw;
+}
+
+.comment {
+	margin-top: 2vw;
+    margin-bottom: 1vw;
+}
+
+.comment-author-date {
+    font-size: 1vw;
+    color: black;
+}
+
+.comment-content {
+    font-size: 1.5vw;
+    color: grey;
+}
+.new-comment {
+	display: inline;
 }
