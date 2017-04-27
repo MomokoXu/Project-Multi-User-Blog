@@ -1,17 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>Edit what you want &#x263a;</h2>
+  <h2>What do you want to comment today &#x263a;</h2>
 
     <form method="post">
-      <label>
-        <div>Subject</div>
-        <input type="text" name="subject" value="{{subject}}">
-      </label>
 
       <label>
-        <div>Blog</div>
-        <textarea name="content">{{content}}</textarea>
+        <div>Comment</div>
+        <textarea name="comment">{{comment}}</textarea>
       </label>
 
       <div class="error">{{error}}</div>

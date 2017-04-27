@@ -5,9 +5,40 @@
 
 	{% if user and post.user.name == user.name %}
 		<div class="manage-post">
-			<form method="get">
-				<button type="submit">Edit</button>
+			<form method="post">
+
+				<button type="submit">
+					<a class="btn" href="/blog/{{post.key().id()}}/edit">
+						Edit
+					</a>
+				</button>
+
+				<button type="submit">
+					<a class="btn" href="/blog/{{post.key().id()}}/delete">
+						Delete
+					</a>
+				</button>
+
 			</form>
 		</div>
 	{% endif%}
+
+	{% if user %}
+		<div class="new-comment">
+			<form method="get">
+				<button type="submit">
+					<a class="btn" href="/blog/{{post.key().id()}}/comment/newcomment">
+						Comment
+					</a>
+				</button>
+			</form>
+		</div>
+	{%endif%}
+
+	<div class="comments">
+		<h4>Comments</4>
+		{% for comment in comments %}
+			{{comment.render(post, user) | safe}}
+		{% endfor %}
+	</div>
 {% endblock %}
