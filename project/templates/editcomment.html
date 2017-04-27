@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>Comment</h2>
-    <div class="comment-area">
-    <form method="post" >
+  <h2>Edit what your comment &#x263a;</h2>
 
+    <form method="post" class="comment-area">
       <label>
+        <div>Comment</div>
         <textarea name="comment">{{comment}}</textarea>
       </label>
 
@@ -14,5 +14,4 @@
       <button type="submit">Submit</button>
       <button type="submit"><a href="/blog/{{post_id}}" class="btn">Cancel</a></button>
     </form>
-  </div>
 {% endblock %}

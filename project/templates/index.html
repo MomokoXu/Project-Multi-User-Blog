@@ -1,25 +1,45 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+	<head>
+	  <link type="text/css" rel="stylesheet" href="/css/main.css" />
+	  <title>Momoko's Blog App</title>
+	</head>
 
-{% block content %}
-	<h2>Welcome to Momoko's Blog App</h2>
-	{% if not user %}
-		<a href="/login" class="option">Login</a>
+	<body>
+		<h1><a href="/" class="main-title">&#x2764; Momoko's Blog App &#x2764;</a></h1>
+		<div class="login-area">
+			{% if user %}
+				{{user.name}} (<a class="login-link" href="/logout">logout</a>)
+			{% else %}
+				<a class="login-link" href="/login">login</a>
+				|
+				<a class="login-link" href="/signup">signup</a>
+			{% endif %}
+		</div>
+		<div id="content">
+		<h2>Welcome to Momoko's Blog App</h2>
+		{% if not user %}
+			<a href="/login" class="option">Login</a>
+			<div class="error">{{login_error}}</div>
+			<br><br>
+			<a href="/signup" class="option">Sign up</a>
+			<br><br>
+		{% endif %}
+		<a href="/blog/newpost" class="option">Create a new post</a>
+		<div class="error">{{newpost_error}}</div>
 		<br><br>
-		<a href="/signup" class="option">Sign up</a>
+		<a href="/blog" class="option">Latest posts</a>
 		<br><br>
-	{% endif %}
-	<a href="/blog/newpost" class="option">Create a new post</a>
-	<div class="error">{{newpost_error}}</div>
-	<br><br>
-	<a href="/blog" class="option">Latest posts</a>
-	<br><br>
-	<form method="post">
-		<label class="option">Look for a particular post
-		<input type="text" name="post_id" value="{{post_id}}">
-		<input type="submit">
-		</label>
-		<div class="error">{{error}}</div>
-	</form>
-{% endblock %}
+		<form method="post">
+			<label class="option">Look for a particular post
+			<input type="text" name="post_id" value="{{post_id}}">
+			<input type="submit">
+			</label>
+			<div class="error">{{error}}</div>
+		</form>
+		</div>
+	</body>
+
+</html>
 
 

@@ -5,7 +5,7 @@
 	</div>
 
 	<div class="comment-author-date">
-		commented by {{comment.user.name}}, &nbsp; {{comment.created_time.strftime("%b %d, %Y")}}
+		commented by {{comment.user.name}}, &nbsp; {{comment.last_modified_time.strftime("%b %d, %Y")}}
 	</div>
 
 	{% if comment.user.name == user.name %}
