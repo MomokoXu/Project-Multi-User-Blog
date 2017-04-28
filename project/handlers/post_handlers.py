@@ -2,7 +2,7 @@ from base_handler import Handler
 from models import User, Post
 from google.appengine.ext import db
 from utility import blog_key
-
+import time
 ######### Blog pages #########
 # Blog Front Handeler: Handler for the main blog URL
 class BlogFront(Handler):
