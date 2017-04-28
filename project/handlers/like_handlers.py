@@ -9,11 +9,16 @@ class LikeBTN(Handler):
     def post(self, post_id):
         if not self.user:
             error = "Login please!"
-            self.render('/index.html', login_error = error)
+            return self.render('/index.html', login_error = error)
+
         pkey = db.Key.from_path('Post', int(post_id), parent = blog_key())
         post = db.get(pkey)
         if not post:
             return redirect('/blog/%s' % post_id)
+
+        if self.user.key().id() == post.user.key().id():
+            return self.redirect('/blog/%s' % post_id)
+
         like_btn = self.request.get('like_btn')
         like = self.user.user_likes.filter('post =', post).get()
         if like_btn == "like" and not like:
