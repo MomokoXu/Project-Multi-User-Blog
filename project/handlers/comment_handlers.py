@@ -100,6 +100,8 @@ class DeleteComment(Handler):
 
         ckey = db.Key.from_path('Comment', int(comment_id), parent = comment_key())
         comment = db.get(ckey)
+        if not comment:
+            return self.redirect('/blog/%s' % post_id)
         if self.user.key().id() != comment.user.key().id():
             return self.redirect('/blog/%s' % post_id)
         comment.delete()
