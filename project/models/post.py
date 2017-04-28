@@ -1,5 +1,5 @@
 from google.appengine.ext import db
-from utility import render_str
+from utility import render_str, blog_key
 from user import User
 # Post model
 class Post(db.Model):
