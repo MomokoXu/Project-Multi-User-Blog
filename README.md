@@ -29,11 +29,11 @@ Hope you enjoy this project!
 
 ## How to use it
 * [Install Python](https://www.python.org/downloads/) version 2.7.
-* [Install Google App Engine SDK] (https://cloud.google.com/appengine/downloads#Google_App_Engine_SDK_for_Python).
+* [Install Google App Engine SDK](https://cloud.google.com/appengine/downloads#Google_App_Engine_SDK_for_Python).
 * [Sign Up for a Google App Engine Account](https://console.cloud.google.com/appengine/).
 * Create a new project in [Google’s Developer Console](https://console.cloud.google.com/) using a unique name.
 * Download or clone `\project`
-* Follow the [App Engine Quickstart](https://cloud.google.com/appengine/docs/python/quickstart) to get a sample app up and running.
+* Follow the [App Engine Quickstart](https://cloud.google.com/appengine/docs/python/quickstart) to get this project app up and running.
 
 
 
