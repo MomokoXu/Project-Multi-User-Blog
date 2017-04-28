@@ -22,8 +22,8 @@ Hope you enjoy this project!
 5. Find a particular post: allows users to search for a particular post by post id which will be shown on the URL after the user create a new post.
 6. [Create a new post](https://momokotest-164402.appspot.com/blog/newpost): allows users who are logged in to create a new post. If the user are not logged in, error message will display. If not both subject and content for the blog are filled, error message will display.
 7. Post management: allows users to manage their own posts. They can edit or delete their post.
-8. [Post comment](https://momokotest-164402.appspot.com/blog/5757334940811264): enables any logged in user can comment on any posts. Users can also manage their own comments. They can edit or delete their comments.
-9. [Post like](https://momokotest-164402.appspot.com/blog/5757334940811264): allows any logged in user can like and unlike any posts and the number of total likes is also shown under the post.
+8. [Post comment](https://momokotest-164402.appspot.com/blog/5757334940811264): enables any logged in user to comment on any posts. Users can also manage their own comments. They can edit or delete their comments.
+9. [Post like](https://momokotest-164402.appspot.com/blog/5757334940811264): allows any logged in user to like and unlike any posts and the number of total likes is also shown under the post.
 7. [Logout](https://momokotest-164402.appspot.com/logout): allows users to log out from current account.
 8. This web app is responsive for different viewports.
 
