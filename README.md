@@ -1,7 +1,8 @@
 # Multi User Blog Web Application
 ![Image of webpage](https://github.com/MomokoXu/Project-Multi-User-Blog/blob/master/project/web-sample.png)
 ## Introduction
-This project aims to implement a multiple user blog web application using Google App Engine. It allows users to sign up for a new account and log in after signing up. It also allows users to search for a particular post by post id and create a new post after logging in. Users can look through the latest posts with or without logging in.
+This project aims to implement a multiple user blog web application using Google App Engine. It allows users to sign up for a new account and log in after signing up. Users can look through the latest posts with or without logging in. It also allows users to search for a particular post by post id and create a new post after logging in.
+For any post, post owner can edit the post or delete the post. Other logged in users can make comments and like or unlike the post. The owener of the comment ia allowed to edit his/her comment or delete the comment.
 
 Hope you enjoy this project!
 
