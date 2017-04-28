@@ -32,23 +32,25 @@
 				</button>
 			</form>
 		</div>
-		<div class="like">
-			<button type="submit" id="like-num">{{like_num}} &#x1f44d;</button>
-			{% if liked == True %}
-				<form method="post" action="/blog/{{post.key().id()}}/like">
-					<button type="submit" name="like_btn" value="unlike">
-						Unlike
-					</button>
-				</form>
-			{% endif %}
-			{% if liked == False %}
-				<form method="post" action="/blog/{{post.key().id()}}/like">
-					<button type="submit" name="like_btn" value="like">
-						Like
-					</button>
-				</form>
-			{% endif %}
-		</div>
+		<button type="submit" id="like-num">{{like_num}} &#x1f44d;</button>
+		{% if post.user.name != user.name%}
+			<div class="like">
+				{% if liked == True %}
+					<form method="post" action="/blog/{{post.key().id()}}/like">
+						<button type="submit" name="like_btn" value="unlike">
+							Unlike
+						</button>
+					</form>
+				{% endif %}
+				{% if liked == False %}
+					<form method="post" action="/blog/{{post.key().id()}}/like">
+						<button type="submit" name="like_btn" value="like">
+							Like
+						</button>
+					</form>
+				{% endif %}
+			</div>
+		{% endif%}
 	{% endif %}
 
 	<div class="comments">

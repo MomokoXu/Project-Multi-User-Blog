@@ -15,7 +15,6 @@ class LikeBTN(Handler):
         if not post:
             return redirect('/blog/%s' % post_id)
         like_btn = self.request.get('like_btn')
-        print like_btn
         like = self.user.user_likes.filter('post =', post).get()
         if like_btn == "like" and not like:
             like = Like(user = self.user, post = post, parent=like_key())
