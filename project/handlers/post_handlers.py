@@ -79,7 +79,7 @@ class EditPost(Handler):
     def post(self, post_id):
         if not self.user:
             error = "Login please!"
-            self.render('/index.html', login_error = error)
+            return self.render('/index.html', login_error = error)
         key = db.Key.from_path('Post', int(post_id), parent = blog_key())
         post = db.get(key)
         if not post:
