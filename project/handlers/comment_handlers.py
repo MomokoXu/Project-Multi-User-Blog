@@ -20,7 +20,7 @@ class NewComment(Handler):
     def post(self, post_id):
         if not self.user:
             error = "Login please!"
-            self.render('/index.html', login_error = error)
+            return self.render('/index.html', login_error = error)
         key = db.Key.from_path('Post', int(post_id), parent = blog_key())
         post = db.get(key)
         if not post:
@@ -47,7 +47,7 @@ class EditComment(Handler):
     def get(self, post_id, comment_id):
         if not self.user:
             error = "Login please!"
-            self.render('/index.html', login_error = error)
+            return self.render('/index.html', login_error = error)
         pkey = db.Key.from_path('Post', int(post_id), parent = blog_key())
         post = db.get(pkey)
         if not post:
@@ -63,7 +63,7 @@ class EditComment(Handler):
     def post(self, post_id, comment_id):
         if not self.user:
             error = "Login please!"
-            self.render('/index.html', login_error = error)
+            return self.render('/index.html', login_error = error)
         pkey = db.Key.from_path('Post', int(post_id), parent = blog_key())
         post = db.get(pkey)
         if not post:
@@ -92,7 +92,7 @@ class DeleteComment(Handler):
     def get(self, post_id, comment_id):
         if not self.user:
             error = "Login please!"
-            self.render('/index.html', login_error = error)
+            return self.render('/index.html', login_error = error)
         pkey = db.Key.from_path('Post', int(post_id), parent = blog_key())
         post = db.get(pkey)
         if not post:
