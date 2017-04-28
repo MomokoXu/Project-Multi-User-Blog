@@ -144,6 +144,7 @@ input[type=password] {
     margin-bottom: 2vh;
     padding: 1vw;
 	border: 3px solid beige;
+	font-weight: bold;
 
 }
 
@@ -171,12 +172,12 @@ h4 {
 
 .comment-author-date {
     font-size: 1vw;
-    color: black;
+    color: grey;
 }
 
 .comment-content {
     font-size: 1.5vw;
-    color: grey;
+    color: black;
 }
 
 .new-comment {
