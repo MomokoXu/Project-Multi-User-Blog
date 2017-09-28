@@ -1,4 +1,6 @@
 from base_handler import Handler
+from google.appengine.ext import db
+from utility import blog_key
 
 ########## Mainpage #########
 class MainPage(Handler):
